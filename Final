@@ -1,0 +1,23 @@
+import pandas as pd
+from pandas import read_csv
+from pandas.core.frame import DataFrame
+import datetime as dt
+from os import write
+import os
+
+
+
+folder_Path = "C:/Users/ryan.fluegge/Documents/First/April"
+zip_List = pd.read_csv("C:/Users/ryan.fluegge/Documents/First/rsp_zip_codes.csv")
+
+
+for filename in os.listdir(folder_Path):
+    f = os.path.join(folder_Path,filename)
+    if os.path.isfile(f):
+        print(f)
+        gasPrices = pd.read_csv(f, encoding = "cp1252")
+        #official_Prices = [zip_List, gasPrices]
+        gasPrices["Zip"] = zip_List["Zip"]
+        #gasPrices = gasPrices[["Zip","1"]]
+        gasPrices.to_csv(f, index=False)
+ 
